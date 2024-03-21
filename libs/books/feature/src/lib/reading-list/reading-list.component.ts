@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { getReadingList, removeFromReadingList } from '@tmo/books/data-access';
+import { getReadingList, markReadingBookAsFinished, removeFromReadingList } from '@tmo/books/data-access';
 import { ReadingListItem } from '@tmo/shared/models';
 import { shareReplay } from 'rxjs/operators';
 
@@ -22,5 +22,9 @@ export class ReadingListComponent {
 
   trackByReadinglist(index: number, reading: ReadingListItem) {
     return reading.bookId;
+  }
+
+  markBookAsFinish(item) {
+    this.store.dispatch(markReadingBookAsFinished({ item }));
   }
 }
