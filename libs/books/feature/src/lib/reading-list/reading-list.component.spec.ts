@@ -5,13 +5,12 @@ import { ReadingListComponent } from './reading-list.component';
 import { BooksFeatureModule } from '@tmo/books/feature';
 
 import { ReadingListItem } from '@tmo/shared/models';
-import {
-  createReadingListItem,
-  SharedTestingModule,
-} from '@tmo/shared/testing';
+import { createReadingListItem, SharedTestingModule} from '@tmo/shared/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { getReadingList, removeFromReadingList } from '@tmo/books/data-access';
 import { MemoizedSelector } from '@ngrx/store';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ReadingListComponent', () => {
   let component: ReadingListComponent;
@@ -19,10 +18,11 @@ describe('ReadingListComponent', () => {
   let mockStore: MockStore;
   let mockReadingListSelector: MemoizedSelector<ReadingListItem, any>;
   const initialState = { entities: {}, ids: [], loaded: false };
+  const readingList: ReadingListItem = createReadingListItem('1');
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [BooksFeatureModule, SharedTestingModule],
+      imports: [BooksFeatureModule, SharedTestingModule, BrowserAnimationsModule],
       providers: [provideMockStore({ initialState })],
     }).compileComponents();
   }));
